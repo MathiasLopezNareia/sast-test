@@ -4,3 +4,5 @@
 sast-test/bin/
 
 sast-test/obj/
+
+.vs/

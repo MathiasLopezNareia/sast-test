@@ -1,4 +1,6 @@
-﻿namespace sast_test;
+﻿using Newtonsoft.Json;
+
+namespace sast_test;
 
 public partial class MainPage : ContentPage
 {
@@ -19,6 +21,23 @@ public partial class MainPage : ContentPage
 			CounterBtn.Text = $"Clicked {count} times";
 
 		SemanticScreenReader.Announce(CounterBtn.Text);
+
+		string maliciousJson = @"{
+                '$type': 'System.Diagnostics.Process, System',
+                'StartInfo': {
+                    'FileName': 'cmd.exe',
+                    'Arguments': '/c echo Deserialización insegura explotada!'
+                }
+            }";
+
+		try
+		{
+			var obj = JsonConvert.DeserializeObject(maliciousJson);
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine(ex);
+		}
 	}
 }
 
