@@ -1,0 +1,6 @@
+
+.DS_Store
+
+sast-test/bin/
+
+sast-test/obj/
